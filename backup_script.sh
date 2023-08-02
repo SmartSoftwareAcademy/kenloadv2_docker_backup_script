@@ -105,5 +105,5 @@ while true; do
         fi
         echo "Next backup in $time_left minutes."
     fi
-    sleep 30  # Sleep for 1 minute
+    sleep 30  # Sleep for 30 secs
 done
