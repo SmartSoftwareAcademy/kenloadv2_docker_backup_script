@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Configuration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="card m-2 p-2 border-3 rounded">
+    <div class="card-header m-2 p-2 border-1 rounded">
+    {% if message %}
+    <div style="color: green" class="border-1 rounded">{{ message }}</div>
+    {% endif %}
+    {% if error_message %}
+    <div style="color: red" class="border-1 rounded">{{ error_message }}</div>
+    {% endif %}
+      <h1>Kenloadv2 Auto Backup Config</h1>
+       <p>Read the release notes <a href="/readme">here</a></p>
+    </div>
+    <div class="card-body">
+      <form action="/update" method="post">
+        <label for="MYSQL_USER">MySQL User:</label>
+        <input type="text" class="form-control" id="MYSQL_USER" name="MYSQL_USER" value="new_user" required>
+        <label for="MYSQL_PASSWORD">MySQL Password:</label>
+        <input type="password" class="form-control" id="MYSQL_PASSWORD" name="MYSQL_PASSWORD" value="root" required>
+        <label for="MYSQL_HOST">MySQL Host:</label>
+        <input type="text" class="form-control" id="MYSQL_HOST" name="MYSQL_HOST" value="192.168.37.10" required>
+        <label for="MYSQL_PORT">MySQL Port:</label>
+        <input type="text" class="form-control" id="MYSQL_PORT" name="MYSQL_PORT" value="3306" required><br>
+        <label for="DATABASE_NAME">Database Name:</label>
+        <input type="text" class="form-control" id="DATABASE_NAME" name="DATABASE_NAME" value="kenloadv2" required>
+        <label for="BACKUP_DIR">Backup Directory:</label>
+        <input type="text" class="form-control" id="BACKUP_DIR" name="BACKUP_DIR" value="/app/backups" disabled>
+        <label for="HOST_DIR">Host Directory:</label>
+        <input type="text" class="form-control" id="HOST_DIR" name="HOST_DIR" value="C:\Users\user\OneDrive\Desktop\CARDS\backups" required>
+        <label for="TZ">Timezone:</label>
+        <input type="text" class="form-control" id="TZ" name="TZ" required>
+        <label for="DESIRED_BACKUP_TIME">Desired Backup Time (24hr format):</label>
+        <input type="text" class="form-control" id="DESIRED_BACKUP_TIME" name="DESIRED_BACKUP_TIME" value="0200" required>
+        <label for="DESIRED_BACKUP_TIME">Container Name/ID:</label>
+        <input type="text" class="form-control" id="CONTAINER_NAME" name="CONTAINER_NAME" value="kenloadv2_autobackup_script" required><br>
+        <input type="submit" class="btn btn-primary" value="Save">
+      </form>
+    </div>
+  </div>
+</body>
+</html>

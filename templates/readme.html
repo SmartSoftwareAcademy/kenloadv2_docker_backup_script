@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Kenloadv2 Autobackup Docker Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #004085;
+            border-bottom: 1px solid #004085;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #28a745;
+        }
+
+        pre {
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            padding: 10px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: "Courier New", monospace;
+            color: #d73a49;
+        }
+
+        ol,
+        ul {
+            margin-left: 20px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Kenloadv2 Autobackup Docker Image</h1>
+
+    <p>This Docker image is designed to automate the backup of a MySQL database using a specified schedule. It runs
+        a backup script inside a Docker container that connects to a MySQL database, performs backups, and stores them
+        in a designated directory. The image is based on Ubuntu 22.04.</p>
+
+    <h2>Getting Started</h2>
+
+    <h3>1. Create MySQL User and Grant Privileges:</h3>
+
+    <p>Run the following commands in your MySQL terminal to create a new user with backup privileges:</p>
+
+    <pre>
+        <code>
+CREATE USER 'new_user'@'%' IDENTIFIED BY 'new_password';
+GRANT ALL PRIVILLEGES ON your_database_name.* TO 'new_user'@'%';
+FLUSH PRIVILEGES;
+        </code>
+    </pre>
+
+    <h3>2. Configure a bind address to enable the docker MySQL instance to connect to the host machine's MySQL instance</h3>
+    <ul>
+        <li>Create <em>my.ini</em> file at the root of the MySQL installation directory if it does not exist already</li>
+        <li>Add this line or uncomment if already exist</li>
+    </ul>
+    <pre>
+        <code>
+bind-address=0.0.0.0
+        </code>
+    </pre>
+
+    <p>To use this Docker image, you need to set several environmental variables and provide appropriate permissions
+        to the MySQL user. Here's how you can get started:</p>
+    <p>First of all, pull the docker image from docker hub,use the steps below:</p>
+    <p>Steps:<br/> <code>docker pull</code> and <code>docker run</code> commands:</p>
+    <pre>
+        <code>
+           docker pull titusdev/kenloadv2_autobackup_script
+        </code>
+    </pre>
+    <pre>
+        <code>
+         docker run -p 5000:5000  -v path/to/host/machine/backup/directory:/app/backups --name kenloadv2_autobackup_script -d kenloadv2_autobackup_script
+        </code>
+    </pre>
+    <strong><p>Remember to replace "path/to/host/machine/backup/directory" with the path in your host machine where you want to save the backup file. The path should have access permissions</p></strong>
+    <p>Next, configure the environmental variables from the <a href="http://127.0.0.1:5000" class="link">Kenloadv2 Auto backup Image Gui</a></p>
+    <h3>3.Replace Environmental Variables to match your needs:</h3>
+    <p>Before running the Docker container, replace the following environmental variables in the <code>docker run</code>
+        command with your own values:</p>
+    <ul>
+        <li><code>MYSQL_USER</code>: The MySQL user with backup privileges.</li>
+        <li><code>MYSQL_PASSWORD</code>: Password for the MySQL user.</li>
+        <li><code>MYSQL_HOST</code>: IP address of the MySQL host machine.</li>
+        <li><code>MYSQL_PORT</code>: MySQL port (default: 3306).</li>
+        <li><code>DATABASE_NAME</code>: The name of the database to be backed up.</li>
+        <li><code>HOST_DIR</code>: Directory path on the host machine to map the container's backup directory and store
+            backup files.</li>
+        <li><code>DESIRED_BACKUP_TIME</code>: Desired daily backup time in 24 HR clock system i.e 0200 for 2AM</li>
+        <li><code>TZ</code>: Timezone for the docker container to use. Default Africa/Nairobi</li>
+    </ul>
+    <h3>4. MySQL User Permissions:</h3>
+    <p>Ensure that you have created a MySQL user with backup privileges (GRANT ALL) specifically for this script. This
+        user should have the necessary privileges to perform backups on the specified database. It's recommended to
+        avoid using the root user for security reasons.</p>
+    <h3>5. Backup Script Overview:</h3>
+    <p>The script inside the Docker container connects to the MySQL database using the provided credentials and
+        performs backups. If a previous backup exists, it performs an incremental backup; otherwise, it performs a
+        full backup. Backups are compressed and stored in the designated backup directory. The script then saves the
+        backup path in the MySQL database for reference.</p>
+    <h2>Usage</h2>
+    <ol>
+        <li>Make sure you have Docker installed on your system.</li>
+        <li>Replace the necessary environmental variables as described
+            above.</li>
+         <li>Restart the docker image from the docker app or via terminal, run <code>docker restart titusdev/kenloadv2_autobackup_script</code></li>
+        <li>The script will execute backups based on the set schedule.</li>
+    </ol>
+    <h2>License</h2>
+    <p>This Docker image and script are provided under the MIT License. See <a href="./LICENSE">LICENSE</a> for
+        details.</p>
+</body>
+</html>

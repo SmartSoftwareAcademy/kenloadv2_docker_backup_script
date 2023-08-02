@@ -1,0 +1,11 @@
+{
+    "MYSQL_USER": "new_user",
+    "MYSQL_PASSWORD": "root",
+    "MYSQL_HOST": "192.168.37.10",
+    "MYSQL_PORT": 3306,
+    "DATABASE_NAME": "kenloadv2",
+    "BACKUP_DIR": "/app/backups",
+    "HOST_DIR": "C:/Users/user/OneDrive/Desktop/CARDS",
+    "DESIRED_BACKUP_TIME": "0200",
+    "TZ": "Africa/Nairobi"
+}
