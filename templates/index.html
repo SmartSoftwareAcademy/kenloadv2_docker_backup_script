@@ -28,17 +28,14 @@
         <input type="text" class="form-control" id="MYSQL_PORT" name="MYSQL_PORT" value="3306" required><br>
         <label for="DATABASE_NAME">Database Name:</label>
         <input type="text" class="form-control" id="DATABASE_NAME" name="DATABASE_NAME" value="kenloadv2" required>
-        <label for="BACKUP_DIR">Backup Directory:</label>
-        <input type="text" class="form-control" id="BACKUP_DIR" name="BACKUP_DIR" value="/app/backups" disabled>
+        <input type="text" class="form-control" id="BACKUP_DIR" name="BACKUP_DIR" value="/app/backups" hidden>
         <label for="HOST_DIR">Host Directory:</label>
         <input type="text" class="form-control" id="HOST_DIR" name="HOST_DIR" value="C:\Users\user\OneDrive\Desktop\CARDS\backups" required>
         <label for="TZ">Timezone:</label>
-        <input type="text" class="form-control" id="TZ" name="TZ" required>
+        <input type="text" class="form-control" id="TZ" name="TZ" value="/Africa/Nairobi" required>
         <label for="DESIRED_BACKUP_TIME">Desired Backup Time (24hr format):</label>
         <input type="text" class="form-control" id="DESIRED_BACKUP_TIME" name="DESIRED_BACKUP_TIME" value="0200" required>
-        <label for="DESIRED_BACKUP_TIME">Container Name/ID:</label>
-        <input type="text" class="form-control" id="CONTAINER_NAME" name="CONTAINER_NAME" value="kenloadv2_autobackup_script" required><br>
-        <input type="submit" class="btn btn-primary" value="Save">
+        <input type="submit" class="btn btn-primary p-2 m-1" value="Save">
       </form>
     </div>
   </div>
